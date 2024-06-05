@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Items for sale!";
+}
+@model Marketplace_App.VM.ItemsForSaleVM
+
+<h2>Products</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <td>Work in progres</td>
+                <td>
+                    <a class="btn btn-primary">Buy</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
