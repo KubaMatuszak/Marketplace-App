@@ -35,7 +35,7 @@ namespace Marketplace_App.Controllers
                     Name = product.Name,
                     ID = product.ID,
                     Price = Convert.ToInt32(product.Price),
-                    Image = "work in progress bby"
+                    Image = product.Image
                 };
                 _marketplaceContext.products.Add(rtn);
                 _marketplaceContext.SaveChanges();
