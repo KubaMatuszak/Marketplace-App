@@ -18,12 +18,18 @@ namespace Marketplace_App.Controllers
             Session session = service.Get(TempData["Session"].ToString());
             if(session.PaymentStatus == "paid")
             {
-                var product = _marketplaceContext.products.Find(TempData["Product"]);
-                _marketplaceContext.products.Remove(product);
-                _marketplaceContext.SaveChanges();
+                //Guid productId;
+                //Guid.TryParse(TempData["Product"].ToString(), out productId);
+                //var product = _marketplaceContext.products.Find(productId);
+                //_marketplaceContext.products.Remove(product);
+                //_marketplaceContext.SaveChanges();
                 return RedirectToAction("Index","Home");
             }
-            return RedirectToAction("Index","Home"); 
+            return RedirectToAction("Failed","Checkout"); 
+        }
+        public IActionResult Failed()
+        {
+            return View(); 
         }
         public IActionResult Cart(Product product)
         {
