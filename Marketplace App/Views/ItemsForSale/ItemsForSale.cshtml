@@ -27,7 +27,7 @@
                 </td>
                 <td>
                     <form asp-action="Cart" asp-controller="Checkout" method="post">
-                        <input type="hidden" name="ProductId" value="@product.ID" />
+                        <input type="hidden" name="ID" value="@product.ID" />
                         <input type="hidden" name="Name" value="@product.Name" />
                         <input type="hidden" name="Description" value="@product.Description" />
                         <input type="hidden" name="Price" value="@product.Price" />

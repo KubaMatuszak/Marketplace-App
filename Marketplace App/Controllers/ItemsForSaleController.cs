@@ -27,6 +27,7 @@ namespace Marketplace_App.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProduct(ProductVM product)
         {
+            product.ID = Guid.NewGuid();
             if (product != null)
             {
                 Product rtn = new Product

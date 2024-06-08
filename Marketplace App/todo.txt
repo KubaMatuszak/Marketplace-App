@@ -1,0 +1,3 @@
+﻿Fix deleting item after sell
+Add identity 
+Fix view

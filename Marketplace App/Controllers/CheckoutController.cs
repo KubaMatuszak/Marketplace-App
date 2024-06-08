@@ -16,20 +16,24 @@ namespace Marketplace_App.Controllers
         {
             var service = new SessionService();
             Session session = service.Get(TempData["Session"].ToString());
-            if(session.PaymentStatus == "paid")
+            if (session.PaymentStatus == "paid")
             {
-                //Guid productId;
-                //Guid.TryParse(TempData["Product"].ToString(), out productId);
-                //var product = _marketplaceContext.products.Find(productId);
-                //_marketplaceContext.products.Remove(product);
-                //_marketplaceContext.SaveChanges();
-                return RedirectToAction("Index","Home");
+                Guid productId;
+                Guid.TryParse(TempData["Product"].ToString(), out productId);
+                var product = _marketplaceContext.products.Find(productId);
+                _marketplaceContext.products.Remove(product);
+                _marketplaceContext.SaveChanges();
+                return RedirectToAction("Succesfull", "Checkout");
             }
-            return RedirectToAction("Failed","Checkout"); 
+            return RedirectToAction("Failed", "Checkout");
         }
         public IActionResult Failed()
         {
-            return View(); 
+            return View();
+        }
+        public IActionResult Succesfull ()
+        {
+            return View();
         }
         public IActionResult Cart(Product product)
         {
@@ -39,13 +43,13 @@ namespace Marketplace_App.Controllers
                 SuccessUrl = domain + $"Checkout/OrderConfirmation",
                 CancelUrl = domain + $"Checkout/OrderFailed",
                 LineItems = new List<SessionLineItemOptions>(),
-                Mode="payment",
+                Mode = "payment",
             };
             var sessionListItem = new SessionLineItemOptions
             {
                 PriceData = new SessionLineItemPriceDataOptions
                 {
-                    UnitAmount = (long)product.Price*100,
+                    UnitAmount = (long)product.Price * 100,
                     Currency = "pln",
                     ProductData = new SessionLineItemPriceDataProductDataOptions
                     {
@@ -59,7 +63,7 @@ namespace Marketplace_App.Controllers
             Session session = service.Create(options);
             TempData["Session"] = session.Id;
             TempData["Product"] = product.ID;
-            Response.Headers.Add("Location",session.Url);
+            Response.Headers.Add("Location", session.Url);
             return new StatusCodeResult(303);
         }
     }
